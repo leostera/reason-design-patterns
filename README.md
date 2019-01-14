@@ -9,13 +9,13 @@ something I invented (but merely rediscovered), and if you have any input
 please send PRs!
 
 #### Patterns
-4. [Bool Is Not Enough](#bool-is-not-enough)
+1. [Bool Is Not Enough](#bool-is-not-enough)
 1. [Interface First](#interface-first)
-2. ["Pretend" Modules](#pretend-modules)
-3. [1 Module for 1 Thing](#1-module-for-1-thing)
-4. [Interpreter Pattern](#interpreter-pattern)
-4. [Polyvariant Error Handling](#polyvariant-error-handling)
-4. [100-Named-Args Functions](#100-named-args-functions)
+1. ["Pretend" Modules](#pretend-modules)
+1. [1 Module for 1 Thing](#1-module-for-1-thing)
+1. [Interpreter Pattern](#interpreter-pattern)
+1. [Polyvariant Error Handling](#polyvariant-error-handling)
+1. [100-Named-Args Functions](#100-named-args-functions)
 
 ## Bool Is Not Enough
 
