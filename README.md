@@ -356,8 +356,8 @@ when something went well, and when something went wrong.
 > the `result` compatibility package or on the standard library of OCaml for
 > OCaml versions above 4.02.3.
 
-Unfortunately, something we end up in a mess of results of results of results
-only to capture the errors that we have:
+Unfortunately, sometimes we end up swallowing some of the errors because the 
+error types from deeper inside our function can't be surfaced cleanly:
 
 ```reason
 module DB = {
@@ -377,14 +377,14 @@ module User = {
   type t = string;
   type errors =
     | Username_can't_be_empty
-    | Something_went_wrong;
+    | Database_error(DB.errors);
   let get: string => result(t, errors) =
     name =>
       if (name == "") {
         Error(Username_can't_be_empty);
       } else {
         switch (DB.query(name)) {
-        | Error(_) => Error(Something_went_wrong)
+        | Error(err) => Error(Database_error(err))
         | Ok(result) => Ok(result)
         };
       };
@@ -397,14 +397,20 @@ module User = {
 switch(User.get("hello")) {
 | Ok(user) => /** do something with user */
 | Error(Username_can't_be_empty)
-| Error(Something_went_wrong) => /** DB error didn't surface :( */
+| Error(Database_error(db_err)) => /** DB error manually surfaced :( */
 }
 ```
+
+You may be able to tell that if `DB.query` depended on another function that
+returned a result as well, then one of it's variants would include other errors
+inside. Nested errors.
 
 An alternative approach I've seen around and have used successfully, is to use
 _polymorphic variants_ instead to model errors. The premise is simple, if you
 had a variant for your error, you backtick it into a polymorphic variant, and
 you let the type-system figure out the rest.
+
+Okay, not quite. But let's refactor the example above to see where it takes us:
 
 ```reason
 module DB = {
@@ -442,6 +448,9 @@ switch (User.get("hello")) {
 };
 ```
 
-Polymorphic variants have plenty more power than regular variants, but those
-do not come for free. There's some costs to be considered, in particular when
-  it comes to internal memory representation.
+This isn't always desirable, but knowing that it's possible and how to do it
+gives us more power to design APIs that are safer and better to work with.
+
+It is worth noting that polymorphic variants have plenty more power than regular
+variants, but those do not come for free. There's some costs to be considered,
+in particular when it comes to internal memory representation.
