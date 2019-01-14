@@ -14,7 +14,7 @@ please send PRs!
 1. ["Pretend" Modules](#pretend-modules)
 1. [1 Module for 1 Thing](#1-module-for-1-thing)
 1. [Interpreter Pattern](#interpreter-pattern)
-1. [Polyvariant Error Handling](#polyvariant-error-handling)
+1. [PolyVariant Error Handling](#polyvariant-error-handling)
 1. [100-Named-Args Functions](#100-named-args-functions)
 
 ## Bool Is Not Enough
