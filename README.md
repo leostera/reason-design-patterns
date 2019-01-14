@@ -3,10 +3,10 @@
 An unofficial collection of "Design Patterns" collected from learning,
 experimenting, and working with Reason and OCaml.
 
-I'll begin by saying that this "patterns" have worked well for me, but, since
+I'll begin by saying that these "patterns" have worked well for me, but, since
 experience is subjective, YMMV. They are not infallible, they are 100% not
-something I invented but merely rediscovered, and if you have better ones
-please PR them :)
+something I invented (but merely rediscovered), and if you have any input
+please send PRs!
 
 #### Patterns
 1. [Interface First](#interface-first)
@@ -19,11 +19,13 @@ please PR them :)
 ## Interface First
 
 Sketch your module by writing a small interface file that includes only the
-minimum things you need our users to know.
+minimum things you need the module users to know.
 
-This is tedious, yes. But it will lead to better thought modules that expose
-only the things that are needed. For example, if your application needs to
-register certain thing, let's say a loaf of bread, you could expose it as:
+This is tedious, yes. But it will lead to better thought through modules that
+expose only the things that are needed.
+
+For example, if you are building software for a bakery, you will need to keep 
+track of stock for something like loafs of bread. You could expose it as:
 
 ```reason
 module Bakery = {
@@ -34,7 +36,7 @@ module Bakery = {
 
 But now whoever consumes `Bakery.stock` can rely on it being a list of `bread`.
 Which is perfectly fine if you run a small bakery that doesn't need superb
-performance or has a big stock!
+performance or has a large inventory!
 
 Now take a look at what happens when limit this interface:
 
@@ -48,11 +50,13 @@ module Bakery : {
 };
 ```
 
-Sure there's a little more duplication, but now as a consumer of `Bakery.stock`
-I have no clue what it is under the hood. I simply _can't know_. This means that
-if the bakery starts running faster and needs to switch the implementation from
-a list to a `Hashtbl` or perhaps just an `Array`, it's completely possible to
-do so without hurting the users.
+Sure there's a little more duplication (the `type bread` redefinition), but now
+as a consumer of `Bakery.stock` I have no clue what `stock` is under the hood.
+I simply _can't know_.
+
+This means that if the bakery starts running faster and needs to switch the
+implementation from a list to a `Hashtbl` or perhaps just an `Array`, it's
+completely possible to do so without hurting the users.
 
 This means that you'll need a few more functions, but they are usually cheap to
 write:
@@ -102,16 +106,15 @@ find that starting from an interface made my modules better.
 
 
 
-
 ## "Pretend" Modules
 
-Sometimes it's useful to pretend your module is already existing, and just use
-it first to find good ergonomics for it.
+Sometimes it's useful to pretend your module already exists, and just use it
+first to find ergonomic APIs that closely match your domain problem.
 
 For example, if we're building a car dealership app we will need to keep track
-of daily appointments that people have made to test-drive some of our cars. I've
-found that sketching out what a nice API for this could look like made my APIs
-a lot better.
+of daily appointments that people have made to test-drive some of your cars.
+I've found that sketching out what a nice API for this could look like made my
+APIs a lot better.
 
 Whenever I reached for good ol' records, unions and lists, to just start
 something out, I'd end up with a lot of code that just deals with lists and
@@ -158,15 +161,16 @@ let s = [
 ];
 ```
 
-I've found that I end up working a lot more around the quirks of lists and records
-than around my domain problem. Silly little things like local module opens for
-records to find their attributes end up getting in the way and sometimes make for 
-strange error messages.
+I've found that I end up working a lot more around the quirks of lists and
+records than around my domain problem. Silly little things like local module
+opens for records to find their attributes end up getting in the way and
+sometimes make for strange error messages.
 
-I've done a better job at exploring by trying to just use a pretend module:
+I've done a better job at exploring problem domains by trying to just use a
+pretend module:
 
 ```reason
-/* NOTE: This modules below do not exist yet */
+/* NOTE: These modules below do not exist yet */
 
 let schedule = Schedule.make();
 
@@ -178,30 +182,36 @@ let a2 = Appointment.on_date(~date=`Unix(1547476154), ~car=car_volvo);
 let schedule' = schedule |> Schedule.book(a1) |> Schedule.book(a2);
 ```
 
+And afterwards filling in the definitions that make them work.
+
 To me, this has 2 clear advantages:
 
 1. **Focuses on DX** — how closely does the API/DSL match the way I think about
    the problem domain? _Cons_ing appointments to a schedule is not how we speak
-   about it, we rather _add_ appointments to a Schedule. (Or _schedule_ them,
-   or _book_ them). Sounds like a small thing but when you have to talk to the
+   about them, we rather _add_ appointments to a Schedule, or _schedule_ them,
+   or _book_ them. Sounds like a small thing but when you have to talk to the
    product/business side you'll be using the same language.
 
 1. **Keep Your Types to Yourself** — notice how we don't need to know a lot
    about the types being used to make these modules work. I don't know if an
    `Appointment` is a record, a variant, or an indexed array of marshalled
-   values. I also don't care. Same goes for the Schedule or even the Car.
+   values. I also don't care. Same goes for the Schedule or even the Car. I do
+   need to know about `Unix` dates and about `New` cars but those can be made
+   to be very close to the domain I work with.
   
-IMO this approach works very well with the [Interface First](#interface-first)
-approach to implementing these modules.
+IMO this approach works very well in combination with the [Interface
+First](#interface-first) approach to implementing these modules.
 
 > Rule of Thumb: do you see any data types that do not belong to your domain?
 
 
 
+
+
 ## 1 Module for 1 Thing
 
-Normally it's a good idea to write a module that deals with _one thing only_.
-To the point that if there is one type in that module, then it should be
+Normally it's a good idea to write a module that deals with _one thing only_,
+to the point that if there is one type in that module, then it should be
 obvious what that type represents.
 
 For example, a module that represents a player in a game could look like this:
@@ -226,10 +236,11 @@ module Player = {
 But it's not obvious that the core of the module is the `stats` type, that
 includes both a player with an inventory, and some life points.
 
-> Rule of Thumb: if you can name your type `t` without making it confusing what
-> the type represents, your module should deal with a single thing.
+> Rule of Thumb: if you can name your type `t` without making any less clear
+> what the type represents, your module might be dealing with a single thing.
 
-If we refactor this into a few modules, where there is a single _core_ type called `t`, we would end up with something like:
+If we refactor this into a few modules, where for each there is a single _core_
+type called `t`, we would end up with something like:
 
 ```reason
 module Inventory = {
@@ -257,7 +268,8 @@ module Stats = {
 Now it's obvious what each module deals with and what should we expect to find
 in each one of them.
 
-Another example from the standarad library are the `Hashtbl` and `Queue` modules:
+Another example from the standarad library are the `Hashtbl` and `Queue`
+modules:
 
 ```reason
 module Queue : {
@@ -276,6 +288,11 @@ Where the type that represents a `Queue` or a `Hashtbl` is called `t`.
 
 This convention is a folklore from OCaml that I believe we should adopt in
 Reason too: it guides our modules to focus on one datatype at a time.
+
+IMO this approach works very well in combination with the [Interface
+First](#interface-first) approach to implementing these modules, since it makes
+them very loosely coupled by default, and thus possibly more reusable.
+
 
 
 
@@ -323,4 +340,108 @@ servers, fetching requests, dealing with low level http/s operations, unix
 sockets, running form validations, and pretty much anything that you can
 _describe_ without _executing_.
 
+
+
+
 ## Polyvariant Error Handling
+
+Something I've struggled with when first starting to work with Reason was how to
+deal with errors from different levels of my application appropriately.
+
+I personally dislike Exceptions, so I tend to use the `result` type to represent
+when something went well, and when something went wrong.
+
+> Note: If you're using BuckleScript, your `result` type is in `Belt.Result`,
+> if you're doing Native Reason, then your `result` type should be available on
+> the `result` compatibility package or on the standard library of OCaml for
+> OCaml versions above 4.02.3.
+
+Unfortunately, something we end up in a mess of results of results of results
+only to capture the errors that we have:
+
+```reason
+module DB = {
+  type errors =
+    | Db_connection_error
+    | Invalid_query;
+  let query: string => result(string, errors) =
+    q =>
+      switch (q) {
+      | "" => Error(Db_connection_error)
+      | "!" => Error(Invalid_query)
+      | q => Ok(q)
+      };
+};
+
+module User = {
+  type t = string;
+  type errors =
+    | Username_can't_be_empty
+    | Something_went_wrong;
+  let get: string => result(t, errors) =
+    name =>
+      if (name == "") {
+        Error(Username_can't_be_empty);
+      } else {
+        switch (DB.query(name)) {
+        | Error(_) => Error(Something_went_wrong)
+        | Ok(result) => Ok(result)
+        };
+      };
+};
+
+/**
+  This does not reflect that the `User.get` call can fail due to database
+  errors and thus we can't handle them.
+*/
+switch(User.get("hello")) {
+| Ok(user) => /** do something with user */
+| Error(Username_can't_be_empty)
+| Error(Something_went_wrong) => /** DB error didn't surface :( */
+}
+```
+
+An alternative approach I've seen around and have used successfully, is to use
+_polymorphic variants_ instead to model errors. The premise is simple, if you
+had a variant for your error, you backtick it into a polymorphic variant, and
+you let the type-system figure out the rest.
+
+```reason
+module DB = {
+  /** Here I'm using _ to let the type system fill in this bit */
+  let query: string => result(string, _) =
+    q =>
+      switch (q) {
+      | "" => Error(`Db_connection_error)
+      | "!" => Error(`Invalid_query)
+      | q => Ok(q)
+      };
+};
+
+module User = {
+  type t = string;
+  let get: string => result(t, _) =
+    name =>
+      if (name == "") {
+        Error(`Username_can't_be_empty);
+      } else {
+        DB.query(name);
+      };
+};
+
+/**
+  Here we see that the error type is being expanded by all the nested error
+  polymorphic variants, which means we can now handle all the possible error
+  cases exhaustively!
+*/
+switch (User.get("hello")) {
+| Ok(user) => /** do something with user */ ()
+| Error(`Username_can't_be_empty)
+| Error(`Invalid_query)
+| Error(`Db_connection_error) => /** DB error didn't surface :( */ ()
+};
+```
+
+Polymorphic variants have plenty more power than regular variants, but those
+do not come for free. There's some costs to be considered, in particular when
+  it comes to internal memory representation.
