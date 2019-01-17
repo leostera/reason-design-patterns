@@ -1,4 +1,4 @@
-# Reason Design Patterns
+# 🗺 Reason Design Patterns
 
 An unofficial collection of "Design Patterns" collected from learning,
 experimenting, and working with Reason and OCaml.
