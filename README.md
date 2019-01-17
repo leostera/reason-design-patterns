@@ -9,7 +9,7 @@ something I invented (but merely rediscovered), and if you have any input
 please send PRs!
 
 #### Patterns
-1. [Bool Is Not Enough](#bool-is-not-enough)
+1. [Boolean Blindness](#boolean-blindness)
 1. [Interface First](#interface-first)
 1. ["Pretend" Modules](#pretend-modules)
 1. [1 Module for 1 Thing](#1-module-for-1-thing)
@@ -17,7 +17,7 @@ please send PRs!
 1. [PolyVariant Error Handling](#polyvariant-error-handling)
 1. [100-Named-Args Functions](#100-named-args-functions)
 
-## Bool Is Not Enough
+## Boolean Blindness
 
 It is tempting to use `bool` to represent a choice between different things.
 Unfortunately
@@ -401,7 +401,7 @@ _describe_ without _executing_.
 
 
 
-## Polyvariant Error Handling
+## PolyVariant Error Handling
 
 Something I've struggled with when first starting to work with Reason was how to
 deal with errors from different levels of my application appropriately.
