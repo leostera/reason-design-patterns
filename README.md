@@ -13,7 +13,7 @@ please send PRs!
 1. [Interface First](#interface-first)
 1. ["Pretend" Modules](#pretend-modules)
 1. [1 Module for 1 Thing](#1-module-for-1-thing)
-1. [Interpreter Pattern](#interpreter-pattern)
+1. [Deferred Execution](#deferred-execution)
 1. [PolyVariant Error Handling](#polyvariant-error-handling)
 1. [100-Named-Args Functions](#100-named-args-functions)
 
@@ -354,17 +354,26 @@ them very loosely coupled by default, and thus possibly more reusable.
 
 
 
-## Interpreter Pattern
+## Deferred Execution
 
-In essence, if your types have absolutely no idea how they will be executed,
-then you sort of have a little description of your program.
+In essence, build your programs as values that describe what should be done, and
+let someone else define how to execute those descriptions.
+
+A very common example of this in pure functional programs is the IO Monad.
 
 For example, when I was writing [HttpKit](https://github.com/ostera/httpkit) I
-found very useful to think of a Server as a concrete piece of data, a value really,
-rather than something that _was being executed_.
+found very useful to think of a Server as a concrete piece of data, a value
+really, rather than something that _was being executed_.
+
+Other libraries such as [lwt](https://github.com/ocsigen/lwt),
+[http/af](https://github.com/inhabitedtype/httpaf),
+[cmdliner](https://github.com/dbuenzli/cmdliner), or
+[markup.ml](https://github.com/aantron/markup.ml) do this successfully,
+allowing you to use them without committing to a particular runtime (such as
+`lwt`, or `async`, or whatever else you want to use).
 
 Sort of how you build up a list of TODOs. You're not really doing them, just
-writing down what should be done.
+writing down what should be done, and sometimes how it should be done.
 
 Then you expose that datatype with a nice API that lets someone else choose how
 to execute it.
