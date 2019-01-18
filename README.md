@@ -621,3 +621,7 @@ let purchase_item:
 Which I'd argue is much easier to digest, and lets me choose whether I want to
 know more about the shopping session, the preferences of the purchase, or the
 order itself.
+
+Keep in mind that these two approaches have very different runtime
+characteristics, and if performance or memory are constrained for your use case
+you may need to live with functions that have plenty of arguments.
