@@ -85,3 +85,6 @@ module Bakery : {
 And you can tell that the interface to the module never changed. This is why I 
 find that starting from an interface made my modules better.
 
+## Simple Top-Down Development
+
+This technique is called _top-down development_ and is especially suited to OCaml/Reason because you can _design_ the interface first according to the ideal, semantic way you'd like to use it, then 'fill in the blanks' with an implementation. In fact, to keep the compiler happy while you develop the interface, you can mock up a _dummy implementation_ that will type-check but fail at runtime. The technique is covered in more detail in this blog post (OCaml syntax): https://blog.janestreet.com/simple-top-down-development-in-ocaml/
