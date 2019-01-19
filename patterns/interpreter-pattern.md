@@ -105,8 +105,3 @@ package, or by a completely different person altogether.
 This pattern seems to be a _Good Way_ of layering your modules since it allows
 you to swap the underlying implementations without needing to change any of the
 semantics of higher layers.
-
-It could be used to make a library that behaves synchronously, to behave
-asynchronousyl — and even then you could have several backends for several
-concurrency libraries! Lwt, Core.async, or Repromise being some examples of
-them.
