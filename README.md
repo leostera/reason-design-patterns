@@ -26,7 +26,7 @@ Find below some patterns to help you write modules:
 1. [Interface First](patterns/interface-first.md)
 1. ["Pretend" Modules](patterns/pretend-modules.md)
 1. [1 Module for 1 Thing](patterns/1-module-for-1-thing.md)
-1. [Deferred Execution](patterns/deferred-execution.md)
+1. [Interpreter Pattern](patterns/interpreter-pattern.md)
 1. [100-Named-Args Functions](patterns/100-named-args-functions.md)
 
 ## Error Handling that Scales

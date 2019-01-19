@@ -1,4 +1,4 @@
-# Deferred Execution
+# Interpreter Pattern
 
 In essence, build your programs as values that describe what should be done, and
 let someone else define how to execute those descriptions.
