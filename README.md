@@ -416,104 +416,99 @@ Something I've struggled with when first starting to work with Reason was how to
 deal with errors from different levels of my application appropriately.
 
 I personally dislike Exceptions, so I tend to use the `result` type to represent
-when something went well, and when something went wrong.
+when something went well and when something went wrong.
 
 > Note: If you're using BuckleScript, your `result` type is in `Belt.Result`,
 > if you're doing Native Reason, then your `result` type should be available on
 > the `result` compatibility package or on the standard library of OCaml for
 > OCaml versions above 4.02.3.
 
-Unfortunately, sometimes we end up swallowing some of the errors because the 
-error types from deeper inside our function can't be surfaced cleanly:
+Unfortunately, sometimes exposing errors from deeper inside our application
+requires explicitly threading them through all the layers that use it. This can
+be quite tedious and allows for accidentally losing error information.
+
+In the example below, we have a `Database` module that can return two different
+errors, both tracked with a variant type, and how we must manually surface them
+in the `User` module.
 
 ```reason
-module DB = {
-  type errors =
-    | Db_connection_error
+module Database : {
+  type error =
+    | Connection_error
     | Invalid_query;
-  let query: string => result(string, errors) =
-    q =>
-      switch (q) {
-      | "" => Error(Db_connection_error)
-      | "!" => Error(Invalid_query)
-      | q => Ok(q)
-      };
+  type t; 
+  let query: (string, t) => result(string, error);
 };
 
-module User = {
-  type t = string;
-  type errors =
+module User : {
+  type error =
     | Username_can't_be_empty
-    | Database_error(DB.errors);
-  let get: string => result(t, errors) =
-    name =>
-      if (name == "") {
-        Error(Username_can't_be_empty);
-      } else {
-        switch (DB.query(name)) {
-        | Error(err) => Error(Database_error(err))
-        | Ok(result) => Ok(result)
-        };
-      };
+    | Database_error(DB.error);
+  type t;
+  let get: (Database.t, string) => result(t, errors);
 };
 
-/**
-  This does not reflect that the `User.get` call can fail due to database
-  errors and thus we can't handle them.
-*/
 switch(User.get("hello")) {
 | Ok(user) => /** do something with user */
-| Error(Username_can't_be_empty)
-| Error(Database_error(db_err)) => /** DB error manually surfaced :( */
+| Error(User.Username_can't_be_empty) => /** handle empty username */
+| Error(User.Database_error(Database.Invalid_query))
+| Error(User.Database_error(Database.Connection_error)) =>
+  /** Database errors manually surfaced :( */
 }
 ```
 
-You may be able to tell that if `DB.query` depended on another function that
-returned a result as well, then one of it's variants would include other errors
-inside. Nested errors.
+Doing this every time we are using the `Database` module means we will have
+several `Database_error(Database.error)` variants in different modules.
+
+You may also be able to tell that if `Database.query` depended on another
+function that returned a result as well, then one of it's variants would
+include other errors inside. Nested errors.
+
+It's clear that there's a duplication that we could get rid of to make our
+codebase more maintainable.
 
 An alternative approach I've seen around and have used successfully, is to use
-_polymorphic variants_ instead to model errors. The premise is simple, if you
-had a variant for your error, you backtick it into a polymorphic variant, and
-you let the type-system figure out the rest.
+_polymorphic variants_ to propagate errors. The premise is simple, and involves
+a single step:
 
-Okay, not quite. But let's refactor the example above to see where it takes us:
+1. Wrap your error type in a polymorphic variant tag that identifies your
+   module.
+
+This approach has been described originally in the
+[`rresult`](http://erratique.ch/software/rresult/doc/Rresult.html#2_Customerrortypes)
+package docs, although it goes into a slightly more involved setup that
+guarantees better composition and extensibility. A must read if you're
+designing a library!
+
+Let's now refactor the example above to see where it takes us:
 
 ```reason
-module DB = {
-  /** Here I'm using _ to let the type system fill in this bit */
-  let query: string => result(string, _) =
-    q =>
-      switch (q) {
-      | "" => Error(`Db_connection_error)
-      | "!" => Error(`Invalid_query)
-      | q => Ok(q)
-      };
+module Database : {
+  type error =
+    | Connection_error
+    | Invalid_query;
+  type t;
+  let query: (string, t) => result(string, [> | `Database(error)]);
 };
 
-module User = {
-  type t = string;
-  let get: string => result(t, _) =
-    name =>
-      if (name == "") {
-        Error(`Username_can't_be_empty);
-      } else {
-        DB.query(name);
-      };
+module User : {
+  type error =
+    | Username_can't_be_empty;
+  type t;
+  let get: (Database.t, string) => result(t, [> | `User(error) ]);
 };
 
-/**
-  Here we see that the error type is being expanded by all the nested error
-  polymorphic variants, which means we can now handle all the possible error
-  cases exhaustively!
-*/
 switch (User.get("hello")) {
-| Ok(user) => /** do something with user */ ()
-| Error(`Username_can't_be_empty)
-| Error(`Invalid_query)
-| Error(`Db_connection_error) => /** DB error didn't surface :( */ ()
+| Ok(user) => /** do something with user */
+| Error(`User(User.Username_can't_be_empty)) => /** handle empty username */
+| Error(`Database(Database.Invalid_query)) => /** handle invalid query */
+| Error(`Database(Database.Connection_error)) => /** handle connection error */
 };
 ```
+
+Here we see that the error type is being expanded by all the nested error
+polymorphic variants that are automatically propagated, which means we can now
+handle all the possible error cases exhaustively!
 
 This isn't always desirable, but knowing that it's possible and how to do it
 gives us more power to design APIs that are safer and better to work with.
