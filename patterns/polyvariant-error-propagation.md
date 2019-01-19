@@ -1,4 +1,4 @@
-# PolyVariant Error Handling
+# PolyVariant Error Propagation
 
 Something I've struggled with when first starting to work with Reason was how to
 deal with errors from different levels of my application appropriately.
@@ -104,5 +104,3 @@ gives us more power to design APIs that are safer and better to work with.
 It is worth noting that polymorphic variants have plenty more power than regular
 variants, but those do not come for free. There's some costs to be considered,
 in particular when it comes to internal memory representation.
-
-
