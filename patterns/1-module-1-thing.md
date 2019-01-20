@@ -80,5 +80,5 @@ This convention is a folklore from OCaml that I believe we should adopt in
 Reason too: it guides our modules to focus on one datatype at a time.
 
 IMO this approach works very well in combination with the [Interface
-First](#interface-first) approach to implementing these modules, since it makes
+First](interface-first.md) approach to implementing these modules, since it makes
 them very loosely coupled by default, and thus possibly more reusable.
