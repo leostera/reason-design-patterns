@@ -7,6 +7,10 @@ These "patterns" have worked well for me, but, since experience is subjective,
 YMMV. They are not infallible, they are 100% not something I invented (but
 merely rediscovered), and if you have any input please send PRs!
 
+## Project Layout
+
+1. [Yawaramin's Modular Project Structure](https://dev.to/yawaramin/a-modular-ocaml-project-structure-1ikd)
+
 ## Domain Modeling
 
 If your code says too much about how things are done, fights records and
