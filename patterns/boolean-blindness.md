@@ -115,14 +115,18 @@ module Admin : {
 If we give `Admin.from_user` a `User.t` value, _maybe_ it returns us an
 `Admin.t` value. That is, not all Users are Admins, but if we get an Admin
 back, then we do not need to check anymore if that Admin is in fact an Admin.
-We say that our `Admin.t` value now carries a _proof_. Functions like
-`Admin.from_user` are normally called _smart constructors_.
+We say that our `Admin.t` value now carries a _proof_.
 
-> NOTE: that _proof_ is really the type `Admin.t`, that can only be created
-> from a `User.t`.
+That _proof_ is really the type `Admin.t`, that can only be created from a
+`User.t`. This is a very powerful technique to make more specific refinements
+over values than the type-system can help us make.
+
+To achieve this, we use functions like `Admin.from_user`, that are normally
+called _smart constructors_.
 
 Now let's expand the first approach to include two function calls, one that's
-meant to be for admin users, and another one that's meant to be for regular users.
+meant to be for admin users, and another one that's meant to be for regular
+users.
 
 ```reason
 let user : User.t = { name: "Joe Camel", role: "admin" };
@@ -135,8 +139,8 @@ if (user |> User.is_admin) {
 ```
 
 Where the type of both those functions is `User.t => unit`, we probably will
-have to check again inside of `do_admin_stuff` if the user is really an admin. So 
-the problem here is that the following snippet is perfectly valid:
+have to check again inside of `do_admin_stuff` if the user is really an admin.
+So the problem here is that the following snippet is perfectly valid:
 
 ```reason
 if (user |> User.is_admin) {
@@ -154,7 +158,8 @@ let do_user_stuff : User.t => unit;
 let do_admin_stuff: Admin.t => unit;
 ```
 
-Voila. Now we need to get a proof that our user is an admin and we're good to go!
+Voila. Now we need to get a proof that our user is an admin and we're good to
+go!
 
 ```reason
 let user : User.t = { name: "Joe Camel" };
