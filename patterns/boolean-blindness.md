@@ -65,7 +65,7 @@ OCaml](http://dev.realworldocaml.org/variants.html#polymorphic-variants).
 
 
 
-### Using Proofs
+## Using Proofs
 
 The idea behing _using proofs_ is that we can only have a value that is valid
 and thus the need for checks on it is gone.
