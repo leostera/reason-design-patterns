@@ -9,15 +9,18 @@ merely rediscovered), and if you have any input please send PRs!
 
 ## Project Layout
 
-1. [Yawaramin's Modular Project Structure](https://dev.to/yawaramin/a-modular-ocaml-project-structure-1ikd)
+1. [Yawaramin's Modular Project
+   Structure](https://dev.to/yawaramin/a-modular-ocaml-project-structure-1ikd)
 
 ## Working with Types
 
 Whether you are modeling TODO lists or mission-critical stuff, these patterns
 should help you build types that are safe to use, refactor, and evolve.
 
-1. [Smart Constructors](patterns/smart-constructors.md)
-1. [Constructor + View](patterns/constructor-view.md)
+1. [Smart Constructors](patterns/smart-constructors.md), to give your types
+   additional refinements that can only be done at runtime.
+1. [Constructor + View](patterns/constructor-view.md), to keep your types
+   abstract without losing pattern-matching.
 
 ## Domain Modeling
 
@@ -31,7 +34,9 @@ take a look at these:
 ## Module Design
 
 When you are writing modules and libraries, it's foundational to get some
-things right. A stable interface that leaks no implementation details, good containment of concerns, and the right amount of flexibility are some of the things to consider.
+things right. A stable interface that leaks no implementation details, good
+containment of concerns, and the right amount of flexibility are some of the
+things to consider.
 
 Find below some patterns to help you write modules:
 
@@ -44,4 +49,5 @@ Find below some patterns to help you write modules:
 ## Error Handling that Scales
 
 1. [PolyVariant Error Propagation](patterns/polyvariant-error-propagation.md)
-1. [Rresult's Guide to Custom Error Types](http://erratique.ch/software/rresult/doc/Rresult.html#usage)
+1. [Rresult's Guide to Custom Error
+   Types](http://erratique.ch/software/rresult/doc/Rresult.html#usage)
