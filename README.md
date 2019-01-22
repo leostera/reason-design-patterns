@@ -17,6 +17,7 @@ Whether you are modeling TODO lists or mission-critical stuff, these patterns
 should help you build types that are safe to use, refactor, and evolve.
 
 1. [Smart Constructors](patterns/smart-constructors.md)
+1. [Constructor + View](patterns/constructor-view.md)
 
 ## Domain Modeling
 
