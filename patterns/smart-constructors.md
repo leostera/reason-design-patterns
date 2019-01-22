@@ -4,7 +4,7 @@ The idea behing Smart Constructors is that we use a function to create values
 only if they pass a certain criteria.
 
 Why? Because sometimes that criteria can not be enforced by the type-system,
-and thus we need to repeatedly check these values to see if they have it.
+and then we are forced to repeatedly check these values to see if they pass it!
 
 Some examples that come to mind are testing numbers to see if they are even or
 odd, or checking if a string is a valid email address.
