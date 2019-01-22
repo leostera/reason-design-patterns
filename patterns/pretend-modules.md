@@ -92,7 +92,7 @@ To me, this has 2 clear advantages:
    to be very close to the domain I work with.
   
 IMO this approach works very well in combination with the [Interface
-First](#interface-first) approach to implementing these modules.
+First](interface-first.md) approach to implementing these modules.
 
 > Rule of Thumb: do you see any data types that do not belong to your domain?
 
