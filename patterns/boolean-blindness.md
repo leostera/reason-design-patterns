@@ -16,7 +16,7 @@ Fortunately we have some tools to do this, each fitting different use cases
 better:
 
 1. [Giving Names to Values](#giving-names-to-values)
-2. [Using Proofs](#using-proofs)
+2. [Using Smart Constructors](#using-smart-constructors)
 
 ## Giving Names to Values 
 
@@ -63,15 +63,14 @@ You can read more about them here: [Polymorphic Variants, Real World
 OCaml](http://dev.realworldocaml.org/variants.html#polymorphic-variants).
 
 
+## Using Smart Constructors
 
+The idea behing Smart Constructors is that we can only create a value that is
+valid and thus the need for checks on it is gone. You can read more about them
+in general [here](smart-constructors.md).
 
-## Using Proofs
-
-The idea behing _using proofs_ is that we can only have a value that is valid
-and thus the need for checks on it is gone.
-
-This means, instead of checking if our user is admin, we construct an admin user
-from our user and from then on we can rely on it being an admin user.
+Instead of checking if our user is an admin, if we construct an admin from a
+user and from then on we can rely on it being an admin user.
 
 Before we would have something like:
 
@@ -115,14 +114,6 @@ module Admin : {
 If we give `Admin.from_user` a `User.t` value, _maybe_ it returns us an
 `Admin.t` value. That is, not all Users are Admins, but if we get an Admin
 back, then we do not need to check anymore if that Admin is in fact an Admin.
-We say that our `Admin.t` value now carries a _proof_.
-
-That _proof_ is really the type `Admin.t`, that can only be created from a
-`User.t`. This is a very powerful technique to make more specific refinements
-over values than the type-system can help us make.
-
-To achieve this, we use functions like `Admin.from_user`, that are normally
-called _smart constructors_.
 
 Now let's expand the first approach to include two function calls, one that's
 meant to be for admin users, and another one that's meant to be for regular
@@ -158,7 +149,7 @@ let do_user_stuff : User.t => unit;
 let do_admin_stuff: Admin.t => unit;
 ```
 
-Voila. Now we need to get a proof that our user is an admin and we're good to
+Voila. Now we need to get evidence that our user is an admin and we're good to
 go!
 
 ```reason
