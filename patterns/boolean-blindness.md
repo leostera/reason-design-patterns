@@ -16,7 +16,7 @@ Fortunately we have some tools to do this, each fitting different use cases
 better:
 
 1. [Giving Names to Values](#giving-names-to-values)
-2. [Using Smart Constructors](#using-smart-constructors)
+2. [Providing Evidence](#providing-evidence)
 
 ## Giving Names to Values 
 
@@ -63,16 +63,19 @@ You can read more about them here: [Polymorphic Variants, Real World
 OCaml](http://dev.realworldocaml.org/variants.html#polymorphic-variants).
 
 
-## Using Smart Constructors
+## Providing Evidence
 
-The idea behing Smart Constructors is that we can only create a value that is
-valid and thus the need for checks on it is gone. You can read more about them
-in general [here](smart-constructors.md).
+The idea behing _providing evidence_ is that if we can only create a value that
+is valid, the need for checks on it is gone because having a value at all is
+evidence enough that the value is valid. We can achieve this with [Smart
+Constructors](smart-constructors.md).
 
 Instead of checking if our user is an admin, if we construct an admin from a
-user and from then on we can rely on it being an admin user.
+user and from then on we can rely on it being an admin user. That is, having an
+admin user is evidence enough that we have a user that is an admin.
 
-Before we would have something like:
+Sounds a little redundant, so let's see some code. Before we would have
+something like:
 
 ```reason
 let user : User.t = { name: "Joe Camel", role: "admin" };
