@@ -11,6 +11,13 @@ merely rediscovered), and if you have any input please send PRs!
 
 1. [Yawaramin's Modular Project Structure](https://dev.to/yawaramin/a-modular-ocaml-project-structure-1ikd)
 
+## Working with Types
+
+Whether you are modeling TODO lists or mission-critical stuff, these patterns
+should help you build types that are safe to use, refactor, and evolve.
+
+1. [Smart Constructors](patterns/smart-constructors.md)
+
 ## Domain Modeling
 
 If your code says too much about how things are done, fights records and
