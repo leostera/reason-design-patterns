@@ -1,8 +1,13 @@
 # Smart Constructors
 
-The idea behing Smart Constructors is that we can only have a value that passes
-a certain criteria that can not be enforced by the type-system, and thus the
-need for repeatedly checking the value is gone.
+The idea behing Smart Constructors is that we use a function to create values
+only if they pass a certain criteria.
+
+Why? Because sometimes that criteria can not be enforced by the type-system,
+and thus we need to repeatedly check these values to see if they have it.
+
+Some examples that come to mind are testing numbers to see if they are even or
+odd, or checking if a string is a valid email address.
 
 To be useful, Smart Constructors normally require a type to be _abstract_. That
 is, other modules can't construct it or deconstruct it directly. This forces
