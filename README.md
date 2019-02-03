@@ -21,6 +21,8 @@ should help you build types that are safe to use, refactor, and evolve.
    additional refinements that can only be done at runtime.
 1. [Constructor + View](patterns/constructor-view.md), to keep your types
    abstract without losing pattern-matching.
+1. [Pretty Printing Values](patterns/pp.md), to always have a flexible way to
+   print values anywhere.
 
 ## Domain Modeling
 
@@ -43,7 +45,7 @@ Find below some patterns to help you write modules:
 1. [Interface First](patterns/interface-first.md)
 1. ["Pretend" Modules](patterns/pretend-modules.md)
 1. [1 Module for 1 Thing](patterns/1-module-1-thing.md)
-1. [Interpreter Pattern](patterns/interpreter-pattern.md)
+1. [Interpreter Pattern](patterns/interpreter/README.md)
 1. [100-Named-Args Functions](patterns/100-named-args-functions.md)
 
 ## Error Handling that Scales
