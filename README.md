@@ -21,8 +21,6 @@ should help you build types that are safe to use, refactor, and evolve.
    additional refinements that can only be done at runtime.
 1. [Constructor + View](patterns/constructor-view.md), to keep your types
    abstract without losing pattern-matching.
-1. [Pretty Printing Values](patterns/pp.md), to always have a flexible way to
-   print values anywhere.
 
 ## Domain Modeling
 
