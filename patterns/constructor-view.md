@@ -82,7 +82,7 @@ module User : {
 };
 ```
 
-Now we have an internal type `t`, and an external type `view` that can be use to
+Now we have an internal type `t`, and an external type `view` that can be used to
 pattern match. This gives us flexibility to implement `t` very efficiently and
 still have the developer experience of pattern matching at the cost of a single
 function call:
