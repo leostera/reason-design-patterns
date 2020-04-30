@@ -1,6 +1,6 @@
 # Smart Constructors
 
-The idea behing Smart Constructors is that we use a function to create values
+The idea behind Smart Constructors is that we use a function to create values
 only if they pass a certain criteria.
 
 Why? Because sometimes that criteria can not be enforced by the type-system,
@@ -55,7 +55,7 @@ module Email : {
 let me : Email.t = "reasonsthlm" /** compile-time error! */
 ```
 
-Which means we need to provide another way of creating these values. Normally,
+Which means we need to provide another way of creating these values; normally,
 that way is a function. Because we have a function, we can decide through
 arbitrary logic whether the value meets our desired criteria: is a valid email
 address.
