@@ -1,5 +1,7 @@
 # Boolean Blindness
 
+#### example [`HundredNamedArgsFunctions.re`](./boolean-blindness/BooleanBlindness.re)
+
 It is tempting to use `bool` to represent a choice between different things.
 Unfortunately
 

@@ -1,5 +1,9 @@
 # Constructor + View
 
+#### example [`ConstructorViewFinal.re`](./constructor-view/ConstructorViewFinal.re)
+#### example [`ConstructorView1.re`](./constructor-view/ConstructorView1.re)
+#### example [`ConstructorView2.re`](./constructor-view/ConstructorView2.re)
+
 When working with types, sometimes it's best to keep them abstract to prevent
 your users from knowing too much about them.
 
