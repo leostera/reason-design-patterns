@@ -1,6 +1,6 @@
 # Boolean Blindness
 
-#### example [`HundredNamedArgsFunctions.re`](./boolean-blindness/BooleanBlindness.re)
+#### example [`BooleanBlindness.re`](./boolean-blindness/BooleanBlindness.re)
 
 It is tempting to use `bool` to represent a choice between different things.
 Unfortunately
@@ -66,6 +66,9 @@ OCaml](http://dev.realworldocaml.org/variants.html#polymorphic-variants).
 
 
 ## Providing Evidence
+
+#### example [`ProvidingEvidence.re`](./providing-evidence/ProvidingEvidence.re)
+#### example [`ProvidingEvidence.rei`](./providing-evidence/ProvidingEvidence.rei)
 
 The idea behing _providing evidence_ is that if we can only create a value that
 is valid, the need for checks on it is gone because having a value at all is

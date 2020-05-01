@@ -1,10 +1,3 @@
-/**
-  This is inconvenient if we need to match on multiple values within this type
-  at the same time. Ideally, we would be able to just do a `switch` and
-  pattern-match like if we had access to some record. Let's see what that would
-  look like with a record type we have direct access to in `ContructorView3`:
- */
-
 module User: {
   type t;
   let make: (~name: string, ~age: int) => option(t);

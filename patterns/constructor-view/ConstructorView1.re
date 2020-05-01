@@ -1,10 +1,4 @@
-/**
-When working with types, sometimes it's best to keep them abstract to prevent
-your users from knowing too much about them.
 
-Making them abstract means that they can't create them directly, and will be
-forced to use a constructor function.
- */
 module User: {
   type t;
   let make: (~name: string, ~age: int) => option(t);

@@ -12,11 +12,6 @@ switch (me) {
 | {age: _, name: _} => Js.log("nothing to see here!")
 };
 
-/**
-Okay, that looks alright! But we still want to have our main type as abstract,
-which means we can't just use a public record. What we can do instead is have a
-separate type for _viewing_ this data.
- */
 module User: {
   type t;
   type view = {
