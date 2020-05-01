@@ -65,6 +65,7 @@ Find below some patterns to help you write modules:
 8. [one-module-one-thing](patterns/100-named-args-functions/PretendModules.re)
 9. [100-named-args-functions](patterns/100-named-args-functions/HundredNamedArgsFunctions.re)
 10. [private-types](patterns/private-types/PrivateTypes.re)
+11. [Interpreter Pattern](patterns/interpreter/free_monad_interpreter.re)
 
 To run examples:
 
