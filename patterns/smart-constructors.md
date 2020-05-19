@@ -57,7 +57,7 @@ module Email : {
 let me : Email.t = "reasonsthlm" /** compile-time error! */
 ```
 
-Which means we need to provide another way of creating these values. Normally,
+Which means we need to provide another way of creating these values; normally,
 that way is a function. Because we have a function, we can decide through
 arbitrary logic whether the value meets our desired criteria: is a valid email
 address.
