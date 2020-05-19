@@ -1,5 +1,8 @@
 # "Pretend" Modules
 
+#### example [`PretendModules.re`](./pretend_modules/PretendModules.re)
+#### example [`PretendModules.rei`](./pretend_modules/PretendModules.rei)
+
 Sometimes it's useful to pretend your module already exists, and just use it
 first to find ergonomic APIs that closely match your domain problem.
 

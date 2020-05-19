@@ -1,5 +1,7 @@
 # Interface First
 
+#### example [`InterfaceFirst.re`](./interface-first/InterfaceFirst.re)
+
 Sketch your module by writing a small interface file that includes only the
 minimum things you need the module users to know.
 

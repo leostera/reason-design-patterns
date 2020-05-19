@@ -1,5 +1,7 @@
 # 1 Module for 1 Thing
 
+#### example [`OneModuleOneThing.re`](./one-module-one-thing/OneModuleOneThing.re)
+
 Normally it's a good idea to write a module that deals with _one thing only_,
 to the point that if there is one type in that module, then it should be
 obvious what that type represents.

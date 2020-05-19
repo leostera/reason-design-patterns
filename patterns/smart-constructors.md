@@ -1,6 +1,8 @@
 # Smart Constructors
 
-The idea behind Smart Constructors is that we use a function to create values
+#### example [`SmartConstructors.re`](./smart_constructors/SmartConstructors.re)
+
+The idea behing Smart Constructors is that we use a function to create values
 only if they pass a certain criteria.
 
 Why? Because sometimes that criteria can not be enforced by the type-system,
