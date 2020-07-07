@@ -1,11 +1,17 @@
-# 🗺 Reason Design Patterns
-
+<h1>
+   🗺 Reason Design Patterns
+   <a href="https://www.patreon.com/AbstractMachines">
+    <img alt="Become a Patron" src="https://c5.patreon.com/external/logo/become_a_patron_button.png" width="150px" />
+  </a>
+</h1>
 An unofficial collection of "Design Patterns" collected from learning,
 experimenting, and working with Reason and OCaml.
 
 These "patterns" have worked well for me, but, since experience is subjective,
 YMMV. They are not infallible, they are 100% not something I invented (but
 merely rediscovered), and if you have any input please send PRs!
+
+If you've found this content useful, consider becoming a Patron with the link above.
 
 ## Project Layout
 
