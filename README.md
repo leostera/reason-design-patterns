@@ -1,8 +1,5 @@
 <h1>
    🗺 Reason Design Patterns
-   <a href="https://www.patreon.com/AbstractMachines">
-    <img alt="Become a Patron" src="https://c5.patreon.com/external/logo/become_a_patron_button.png" width="150px" />
-  </a>
 </h1>
 An unofficial collection of "Design Patterns" collected from learning,
 experimenting, and working with Reason and OCaml.
