@@ -53,7 +53,7 @@ Find below some patterns to help you write modules:
 ## Error Handling that Scales
 
 1. [PolyVariant Error Propagation](patterns/polyvariant-error-propagation.md)
-2. [Rresult's Guide to Custom Error
+2. [Result's Guide to Custom Error
    Types](http://erratique.ch/software/rresult/doc/Rresult.html#usage)
 
 ## Examples
