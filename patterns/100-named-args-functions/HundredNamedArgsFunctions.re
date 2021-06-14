@@ -61,7 +61,8 @@ module Purchase_preference: {
   let make:
     (
       ~should_email: Email_preference.t=?,
-      ~history_status: Purchase_history.Status.t=?
+      ~history_status: Purchase_history.Status.t=?,
+      unit
     ) =>
     t;
 } = {
@@ -69,7 +70,7 @@ module Purchase_preference: {
     should_email: option(Email_preference.t),
     history_status: option(Purchase_history.Status.t),
   };
-  let make = (~should_email=?, ~history_status=?) => {
+  let make = (~should_email=?, ~history_status=?, ()) => {
     should_email,
     history_status,
   };
