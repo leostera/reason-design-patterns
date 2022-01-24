@@ -63,7 +63,7 @@ a single step:
    module.
 
 This approach has been described originally in the
-[`rresult`](http://erratique.ch/software/rresult/doc/Rresult.html#2_Customerrortypes)
+[`rresult`](https://erratique.ch/software/rresult/doc/Rresult/index.html#custom-error-types)
 package docs, although it goes into a slightly more involved setup that
 guarantees better composition and extensibility. A must read if you're
 designing a library!
