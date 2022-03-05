@@ -8,7 +8,7 @@ These "patterns" have worked well for me, but, since experience is subjective,
 YMMV. They are not infallible, they are 100% not something I invented (but
 merely rediscovered), and if you have any input please send PRs!
 
-If you've found this content useful, consider becoming a Patron with the link above.
+If you've found this content useful, considering ordering a copy my book: [Practical ReScript](https://practicalrescript.com)
 
 ## Project Layout
 
