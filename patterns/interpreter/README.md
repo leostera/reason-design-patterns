@@ -232,7 +232,7 @@ This means executing the program we defined above is as easy as calling the
 `run` function with the `program` value.
 
 ```reason
-let result : string = program |> In_memory_runner.run; 
+let result : string = program |> In_memory_runner.run;
 ```
 
 And we can define any number of runners that do different things with our

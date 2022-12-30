@@ -58,7 +58,7 @@ Find below some patterns to help you write modules:
 
 ## Examples
 
-1. [smart_constructors](patterns/smart_constructors/SmartConstructors.re)
+1. [smart-constructors](patterns/smart-constructors/SmartConstructors.re)
 2. [constructor-views](patterns/constructor-view/ConstructorViewFinal.re)
 3. [boolean-blindness](patterns/boolean-blindness/BooleanBlindness.re)
 4. [providing-evidence](patterns/providing-evidence/ProvidingEvidence.re)
@@ -68,7 +68,7 @@ Find below some patterns to help you write modules:
 8. [one-module-one-thing](patterns/one-module-one-thing/OneModuleOneThing.re)
 9. [100-named-args-functions](patterns/100-named-args-functions/HundredNamedArgsFunctions.re)
 10. [private-types](patterns/private-types/PrivateTypes.re)
-11. [Interpreter Pattern](patterns/interpreter/free_monad_interpreter.re)
+11. [interpreter-pattern](patterns/interpreter/FreeMonadInterpreter.re)
 
 To run examples:
 
