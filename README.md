@@ -34,7 +34,7 @@ take a look at these:
 1. [Boolean Blindness](patterns/boolean-blindness.md)
 2. ["Pretend" Modules](patterns/pretend-modules.md)
 
- Module Design
+## Module Design
 
 When you are writing modules and libraries, it's foundational to get some
 things right. A stable interface that leaks no implementation details, good
