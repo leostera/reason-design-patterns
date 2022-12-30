@@ -63,7 +63,7 @@ Find below some patterns to help you write modules:
 3. [boolean-blindness](patterns/boolean-blindness/BooleanBlindness.re)
 4. [providing-evidence](patterns/providing-evidence/ProvidingEvidence.re)
 5. [interface-first](patterns/pretend-modules/InterfaceFirst.re)
-6. [pretend_modules](patterns/pretend-modules/PretendModules.re)
+6. [pretend-modules](patterns/pretend-modules/PretendModules.re)
 7. [interface-first](patterns/pretend-modules/InterfaceFirst.re)
 8. [one-module-one-thing](patterns/one-module-one-thing/OneModuleOneThing.re)
 9. [100-named-args-functions](patterns/100-named-args-functions/HundredNamedArgsFunctions.re)
