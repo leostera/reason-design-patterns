@@ -1,20 +1,20 @@
 {
-	"name": "reason-design-patterns",
-	"version": "0.1.0",
-	"sources": {
-		"dir": "patterns",
-		"subdirs": true
-	},
-	"ignored-dirs": [ "patterns/interpreter" ],
-	"package-specs": {
-		"module": "commonjs",
-		"in-source": true
-	},
-	"suffix": ".bs.js",
-	"bs-dependencies": [],
-	"warnings": {
-		"error": "+101"
-	},
-	"namespace": true,
-	"refmt": 3
+  "name": "reason-design-patterns",
+  "version": "0.1.0",
+  "sources": {
+    "dir": "patterns",
+    "subdirs": true
+  },
+  "ignored-dirs": [ "patterns/interpreter" ],
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": true
+  },
+  "suffix": ".bs.js",
+  "bs-dependencies": [],
+  "warnings": {
+    "number":"-109-34-32",
+    "error": "+101"
+  },
+  "namespace": true
 }
